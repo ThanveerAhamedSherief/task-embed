@@ -1,25 +1,5 @@
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
 
-// export default defineConfig({
-//   plugins: [react()],
-//   build: {
-//     lib: {
-//       entry: './src/main.jsx', 
-//       name: 'HelloWorldApp',
-//       fileName: (format) => `hello-world-app.${format}.js`,
-//     },
-//     rollupOptions: {
-//       external: ['react', 'react-dom'],
-//       output: {
-//         globals: {
-//           react: 'React',
-//           'react-dom': 'ReactDOM',
-//         }
-//       },
-//     },
-//   },
-// });
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -31,11 +11,14 @@ const __dirname = path.dirname(__filename);
 // Create separate configs for lib and web builds
 const createLibConfig = () => ({
   plugins: [react()],
+  define: {
+    'process.env': {}
+  },
   build: {
     outDir: 'lib',
     lib: {
       entry: './src/main.jsx',
-      name: 'HelloWorldWidget',
+      name: 'HelloWorldApp',
       fileName: (format) => `hello-world-app.${format}.js`,
     },
     rollupOptions: {
@@ -44,6 +27,7 @@ const createLibConfig = () => ({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          HelloWorldApp: 'HelloWorldApp'
         },
       },
     },
